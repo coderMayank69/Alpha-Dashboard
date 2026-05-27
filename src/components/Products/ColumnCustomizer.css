@@ -1,0 +1,99 @@
+.col-customizer {
+  position: relative;
+}
+
+.col-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+}
+
+.col-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 220px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  overflow: hidden;
+}
+
+.col-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.col-dropdown-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 6px 14px;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border);
+}
+
+.col-list {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.col-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 7px;
+  cursor: grab;
+  transition: background var(--transition);
+}
+
+.col-item:active {
+  cursor: grabbing;
+}
+
+.col-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.drag-handle {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.col-item-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex: 1;
+}
+
+.col-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.col-check.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}

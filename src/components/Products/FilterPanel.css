@@ -1,0 +1,156 @@
+.filter-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.filter-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.clear-btn {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+}
+
+.filter-section {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-section:last-child {
+  border-bottom: none;
+}
+
+.filter-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+/* Category chips */
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.filter-chip {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-transform: capitalize;
+}
+
+.filter-chip:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.filter-chip.active {
+  background: var(--accent-dim);
+  border-color: hsla(252, 100%, 68%, 0.35);
+  color: var(--accent);
+}
+
+/* Rating options */
+.rating-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rating-option {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 7px;
+  font-size: 13px;
+  color: hsl(38, 92%, 52%);
+  cursor: pointer;
+  transition: all var(--transition);
+  background: transparent;
+  border: 1px solid transparent;
+  text-align: left;
+}
+
+.rating-option span {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-left: 2px;
+}
+
+.rating-option:hover {
+  background: var(--bg-tertiary);
+}
+
+.rating-option.active {
+  background: var(--warning-dim);
+  border-color: hsla(38, 92%, 52%, 0.3);
+}
+
+/* Stock checkboxes */
+.filter-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 3px 0;
+}
+
+.filter-check-item input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.filter-check-item:hover {
+  color: var(--text-primary);
+}
