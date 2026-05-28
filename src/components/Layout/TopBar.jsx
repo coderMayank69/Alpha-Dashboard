@@ -89,12 +89,13 @@ export default function TopBar({ onMenuToggle, mobileOpen }) {
           onClick={cycleTheme}
           aria-label={`Switch theme (current: ${themeLabel})`}
           data-tooltip={`${themeLabel} mode`}
+          data-tooltip-position="bottom"
         >
           <ThemeIcon size={16} className="theme-icon" />
         </button>
 
         {/* Notification Bell */}
-        <button className="btn-icon notif-btn" aria-label="Notifications" data-tooltip="Notifications">
+        <button className="btn-icon notif-btn" aria-label="Notifications" data-tooltip="Notifications" data-tooltip-position="bottom">
           <Bell size={16} />
           <span className="notif-dot" />
         </button>

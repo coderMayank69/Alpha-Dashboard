@@ -149,7 +149,7 @@ export default function AnalyticsPage() {
                   interval={0}
                 />
                 <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 11 }} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={false} />
                 <Bar dataKey="count" name="Products" radius={[4, 4, 0, 0]}>
                   {analytics.categoryData.slice(0, 12).map((_, i) => (
                     <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
@@ -169,7 +169,7 @@ export default function AnalyticsPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
                 <XAxis dataKey="rating" tick={{ fill: 'var(--text-muted)', fontSize: 13 }} />
                 <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 11 }} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={false} />
                 <Bar dataKey="count" name="Products" radius={[4, 4, 0, 0]} fill="hsl(38, 92%, 52%)" />
               </BarChart>
             </ResponsiveContainer>
@@ -188,7 +188,7 @@ export default function AnalyticsPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
                 <XAxis dataKey="range" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} />
                 <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 11 }} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={false} />
                 <Bar dataKey="count" name="Products" radius={[4, 4, 0, 0]} fill="var(--accent)" />
               </BarChart>
             </ResponsiveContainer>
@@ -209,7 +209,7 @@ export default function AnalyticsPage() {
                 <XAxis type="number" tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
                   tickFormatter={v => `$${(v/1000).toFixed(0)}k`} />
                 <YAxis dataKey="name" type="category" tick={{ fill: 'var(--text-muted)', fontSize: 11 }} width={70} />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip content={<CustomTooltip />} cursor={false} />
                 <Bar dataKey="value" name="Value ($)" radius={[0, 4, 4, 0]}>
                   {analytics.topCategoryValue.map((_, i) => (
                     <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />

@@ -158,10 +158,10 @@ export default function AIChatBot() {
               </div>
             </div>
             <div className="chat-header-actions">
-              <button className="btn-icon" onClick={() => setShowKeyInput(s => !s)} aria-label="API settings" data-tooltip="API Key">
+              <button className="btn-icon" onClick={() => setShowKeyInput(s => !s)} aria-label="API settings" data-tooltip="API Key" data-tooltip-position="bottom">
                 ⚙️
               </button>
-              <button className="btn-icon" onClick={clearChat} aria-label="Clear chat" data-tooltip="Clear">
+              <button className="btn-icon" onClick={clearChat} aria-label="Clear chat" data-tooltip="Clear" data-tooltip-position="bottom">
                 <Trash2 size={14} />
               </button>
             </div>

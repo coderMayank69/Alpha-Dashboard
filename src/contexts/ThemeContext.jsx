@@ -9,7 +9,7 @@ function getSystemTheme() {
 export function ThemeProvider({ children }) {
   const [theme, setThemeState] = useState(() => {
     const stored = localStorage.getItem('alpha-theme');
-    return stored || 'system';
+    return stored || 'light';
   });
 
   const resolvedTheme = theme === 'system' ? getSystemTheme() : theme;
