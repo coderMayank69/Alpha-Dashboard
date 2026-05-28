@@ -1,10 +1,13 @@
+/* ============================================================
+   PAGINATION — DUAL THEME
+   ============================================================ */
 .pagination {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   gap: 12px;
-  padding-top: 4px;
+  padding-top: 14px;
+  flex-wrap: wrap;
 }
 
 .pagination-info {
@@ -14,6 +17,7 @@
 
 .pagination-info strong {
   color: var(--text-primary);
+  font-weight: 600;
 }
 
 .pagination-controls {
@@ -25,29 +29,25 @@
 .page-btn {
   min-width: 32px;
   height: 32px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 7px;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
   cursor: pointer;
   transition: all var(--transition);
+  border: 1px solid transparent;
+  background: none;
+  font-family: var(--font);
   padding: 0 6px;
 }
 
 .page-btn:hover:not(:disabled) {
   background: var(--bg-tertiary);
   color: var(--text-primary);
-  border-color: var(--border-hover);
-}
-
-.page-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
+  border-color: var(--border);
 }
 
 .page-btn.active {
@@ -56,33 +56,36 @@
   border-color: var(--accent);
 }
 
-.page-dots {
-  padding: 0 6px;
-  color: var(--text-muted);
-  font-size: 13px;
-  line-height: 32px;
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
+.page-dots {
+  padding: 0 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+/* Per-page limit */
 .pagination-limit {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .limit-label {
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .limit-select {
-  width: auto;
-  padding: 5px 24px 5px 8px;
+  padding: 5px 28px 5px 8px;
   font-size: 12.5px;
-}
-
-@media (max-width: 600px) {
-  .pagination {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  min-height: 30px;
+  background-size: 10px;
 }

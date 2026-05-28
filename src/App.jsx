@@ -1,9 +1,11 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { ProductStatusProvider } from './contexts/ProductStatusContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import DashboardLayout from './components/Layout/DashboardLayout';
+import AIChatBot from './components/AI/AIChatBot';
 
 // Lazy-loaded pages (Performance Optimization #5)
 const LoginPage         = lazy(() => import('./pages/LoginPage'));
@@ -27,43 +29,48 @@ function PageLoader() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <ProductStatusProvider>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              {/* Public */}
-              <Route path="/login" element={<LoginPage />} />
+      <ThemeProvider>
+        <AuthProvider>
+          <ProductStatusProvider>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                {/* Public */}
+                <Route path="/login" element={<LoginPage />} />
 
-              {/* Protected Dashboard Shell */}
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <DashboardLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<Navigate to="/dashboard" replace />} />
-                <Route path="dashboard" element={<DashboardPage />} />
-                <Route path="products" element={<ProductsPage />} />
-                <Route path="products/:id" element={<ProductDetailPage />} />
+                {/* Protected Dashboard Shell */}
                 <Route
-                  path="analytics"
+                  path="/"
                   element={
-                    <ProtectedRoute adminOnly>
-                      <AnalyticsPage />
+                    <ProtectedRoute>
+                      <DashboardLayout />
                     </ProtectedRoute>
                   }
-                />
-                <Route path="settings" element={<SettingsPage />} />
-              </Route>
+                >
+                  <Route index element={<Navigate to="/dashboard" replace />} />
+                  <Route path="dashboard" element={<DashboardPage />} />
+                  <Route path="products" element={<ProductsPage />} />
+                  <Route path="products/:id" element={<ProductDetailPage />} />
+                  <Route
+                    path="analytics"
+                    element={
+                      <ProtectedRoute adminOnly>
+                        <AnalyticsPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="settings" element={<SettingsPage />} />
+                </Route>
 
-              {/* Catch-all */}
-              <Route path="*" element={<Navigate to="/dashboard" replace />} />
-            </Routes>
-          </Suspense>
-        </ProductStatusProvider>
-      </AuthProvider>
+                {/* Catch-all */}
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
+              </Routes>
+            </Suspense>
+
+            {/* Global AI Chatbot */}
+            <AIChatBot />
+          </ProductStatusProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

@@ -1,17 +1,37 @@
+/* ============================================================
+   PRODUCT GRID — DUAL THEME, MOBILE-FIRST
+   ============================================================ */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
+@media (min-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Product Card */
 .product-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  cursor: pointer;
   transition: all var(--transition);
-  animation: fadeIn 0.3s ease-out both;
+  cursor: pointer;
+}
+
+[data-theme="light"] .product-card {
+  background: #ffffff;
+  box-shadow: var(--shadow-card);
 }
 
 .product-card:hover {
@@ -21,84 +41,86 @@
 }
 
 .product-card.hidden-card {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
+/* Card image */
 .card-img-wrap {
   position: relative;
-  aspect-ratio: 1;
-  background: var(--bg-tertiary);
   overflow: hidden;
+  background: var(--bg-tertiary);
+}
+
+[data-theme="light"] .card-img-wrap {
+  background: #f3f4f6;
 }
 
 .card-img {
   width: 100%;
-  height: 100%;
+  height: 160px;
   object-fit: cover;
+  display: block;
   transition: transform 0.4s ease;
 }
 
 .product-card:hover .card-img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .card-category {
   position: absolute;
   top: 8px;
   left: 8px;
-  background: hsla(224, 27%, 7%, 0.8);
-  backdrop-filter: blur(6px);
-  color: var(--text-secondary);
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 20px;
   font-size: 10px;
   font-weight: 600;
-  text-transform: capitalize;
+  background: var(--bg-glass);
+  backdrop-filter: blur(8px);
   border: 1px solid var(--border);
+  color: var(--text-secondary);
+  text-transform: capitalize;
 }
 
 .card-publish-btn {
   position: absolute;
-  bottom: 8px;
+  top: 8px;
   right: 8px;
-  font-size: 10px;
-  font-weight: 600;
   padding: 3px 8px;
   border-radius: 20px;
-  border: 1px solid var(--border);
-  backdrop-filter: blur(6px);
+  font-size: 9.5px;
+  font-weight: 700;
   cursor: pointer;
+  border: none;
+  font-family: var(--font);
   transition: all var(--transition);
 }
 
 .card-publish-btn.published {
   background: var(--success-dim);
   color: var(--success);
-  border-color: hsla(145, 65%, 45%, 0.3);
 }
 
 .card-publish-btn.hidden {
   background: var(--danger-dim);
   color: var(--danger);
-  border-color: hsla(0, 72%, 55%, 0.3);
 }
 
+/* Card body */
 .card-body {
-  padding: 12px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
 .card-title {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--text-primary);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-meta {
@@ -114,8 +136,8 @@
 }
 
 .price {
-  font-weight: 700;
   font-size: 15px;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
@@ -125,15 +147,18 @@
   text-decoration: line-through;
 }
 
+/* Card footer - stock */
 .card-footer {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
 }
 
 .stock-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -143,20 +168,12 @@
 .stock-dot.out-stock { background: var(--danger); }
 
 .stock-text {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-  flex: 1;
+  font-weight: 500;
 }
 
 .stock-count {
-  font-size: 10.5px;
+  margin-left: auto;
   color: var(--warning);
+  font-size: 10.5px;
   font-weight: 600;
-}
-
-@media (max-width: 480px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
 }

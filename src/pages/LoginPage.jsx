@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Zap, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
+import Logo from '../components/Layout/Logo';
 import './LoginPage.css';
 
 export default function LoginPage() {
@@ -20,7 +21,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     setLoading(true);
-    await new Promise(r => setTimeout(r, 400)); // simulate async
+    await new Promise(r => setTimeout(r, 400));
     const result = login(email, password);
     if (result.success) {
       navigate(from, { replace: true });
@@ -47,9 +48,7 @@ export default function LoginPage() {
       <div className="login-card animate-fade-in">
         {/* Logo */}
         <div className="login-logo">
-          <div className="logo-icon-lg">
-            <Zap size={24} />
-          </div>
+          <Logo size={40} />
           <div>
             <h1 className="login-brand">Alpha</h1>
             <p className="login-tagline">Product Management Dashboard</p>

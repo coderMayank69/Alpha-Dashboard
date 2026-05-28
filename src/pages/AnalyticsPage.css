@@ -1,3 +1,6 @@
+/* ============================================================
+   ANALYTICS PAGE — DUAL THEME, MOBILE-FIRST
+   ============================================================ */
 .analytics-page {
   display: flex;
   flex-direction: column;
@@ -15,72 +18,81 @@
   letter-spacing: -0.02em;
 }
 
+@media (min-width: 640px) {
+  .analytics-title {
+    font-size: 26px;
+  }
+}
+
 .analytics-sub {
   font-size: 13px;
   color: var(--text-secondary);
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
-/* Stats grid */
+/* Stat Cards Grid */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-@media (max-width: 1000px) {
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
 }
 
-@media (max-width: 520px) {
-  .stats-grid { grid-template-columns: 1fr; }
-}
-
-/* Charts */
+/* Charts Grid */
 .charts-grid-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
-@media (max-width: 900px) {
-  .charts-grid-2 { grid-template-columns: 1fr; }
+@media (min-width: 768px) {
+  .charts-grid-2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
 }
 
+/* Chart Card */
 .chart-card {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .chart-card {
+    padding: 20px;
+  }
 }
 
 .chart-title {
   font-size: 14px;
   font-weight: 600;
   color: var(--text-primary);
+  margin-bottom: 16px;
 }
 
 .chart-container {
   width: 100%;
 }
 
-/* Recharts overrides */
-.recharts-cartesian-grid-horizontal line,
-.recharts-cartesian-grid-vertical line {
-  stroke: var(--border);
-}
-
-.recharts-tooltip-wrapper {
-  outline: none;
-}
-
+/* Chart Tooltip */
 .chart-tooltip {
-  background: var(--bg-secondary);
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   padding: 10px 14px;
-  font-size: 12.5px;
   box-shadow: var(--shadow-md);
+  font-size: 13px;
+}
+
+[data-theme="light"] .chart-tooltip {
+  background: #ffffff;
 }
 
 .tooltip-label {
@@ -88,4 +100,9 @@
   color: var(--text-primary);
   margin-bottom: 4px;
   text-transform: capitalize;
+}
+
+.chart-tooltip p {
+  margin: 2px 0;
+  font-size: 12px;
 }

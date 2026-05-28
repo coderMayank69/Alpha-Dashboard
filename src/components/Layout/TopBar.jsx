@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Bell, LogOut, User, Menu, X, ChevronDown } from 'lucide-react';
+import { Bell, LogOut, User, Menu, X, ChevronDown, Sun, Moon, Monitor } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
+import Logo from './Logo';
 import './TopBar.css';
 
 const BREADCRUMBS = {
@@ -13,6 +15,7 @@ const BREADCRUMBS = {
 
 export default function TopBar({ onMenuToggle, mobileOpen }) {
   const { user, logout, isAdmin } = useAuth();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,6 +28,13 @@ export default function TopBar({ onMenuToggle, mobileOpen }) {
     navigate('/login');
   };
 
+  const cycleTheme = () => {
+    const next = theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light';
+    setTheme(next);
+  };
+
+  const ThemeIcon = theme === 'light' ? Sun : theme === 'dark' ? Moon : Monitor;
+
   return (
     <header className="topbar">
       <div className="topbar-left">
@@ -33,7 +43,13 @@ export default function TopBar({ onMenuToggle, mobileOpen }) {
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
 
-        {/* Breadcrumb */}
+        {/* Mobile logo */}
+        <div className="topbar-mobile-logo">
+          <Logo size={26} />
+          <span className="topbar-brand">Alpha</span>
+        </div>
+
+        {/* Breadcrumb — hidden on mobile */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           {crumbs.map((crumb, i) => (
             <span key={crumb} className="breadcrumb-item">
@@ -47,6 +63,16 @@ export default function TopBar({ onMenuToggle, mobileOpen }) {
       </div>
 
       <div className="topbar-right">
+        {/* Theme Toggle */}
+        <button
+          className="btn-icon theme-toggle"
+          onClick={cycleTheme}
+          aria-label={`Theme: ${theme}`}
+          data-tooltip={`Theme: ${theme}`}
+        >
+          <ThemeIcon size={17} className="theme-icon" />
+        </button>
+
         {/* Notification Bell */}
         <button className="btn-icon" aria-label="Notifications" data-tooltip="Notifications">
           <Bell size={18} />
@@ -66,7 +92,7 @@ export default function TopBar({ onMenuToggle, mobileOpen }) {
           </button>
 
           {dropdownOpen && (
-            <div className="dropdown-menu animate-fade-in">
+            <div className="dropdown-menu animate-scale-in">
               <div className="dropdown-header">
                 <div className="dropdown-avatar">{user?.avatar}</div>
                 <div>

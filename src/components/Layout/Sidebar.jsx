@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, BarChart3, Settings, ChevronLeft, ChevronRight, Zap } from 'lucide-react';
+import { LayoutDashboard, Package, BarChart3, Settings, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import Logo from './Logo';
 import './Sidebar.css';
 
 const NAV_ITEMS = [
@@ -11,17 +11,15 @@ const NAV_ITEMS = [
   { to: '/settings',  icon: Settings,         label: 'Settings' },
 ];
 
-export default function Sidebar({ collapsed, onToggle }) {
+export default function Sidebar({ collapsed, onToggle, mobileOpen }) {
   const { user, isAdmin } = useAuth();
   const location = useLocation();
 
   return (
-    <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+    <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
       {/* Logo */}
       <div className="sidebar-logo">
-        <div className="logo-icon">
-          <Zap size={18} />
-        </div>
+        <Logo size={30} />
         {!collapsed && <span className="logo-text">Alpha</span>}
       </div>
 
@@ -37,7 +35,7 @@ export default function Sidebar({ collapsed, onToggle }) {
               className={`nav-item ${active ? 'active' : ''}`}
               data-tooltip={collapsed ? label : undefined}
             >
-              <Icon size={18} />
+              <Icon size={18} strokeWidth={active ? 2.2 : 1.8} />
               {!collapsed && <span>{label}</span>}
               {active && !collapsed && <div className="nav-active-indicator" />}
             </NavLink>

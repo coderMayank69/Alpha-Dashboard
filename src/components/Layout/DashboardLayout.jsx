@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
+import BottomNav from './BottomNav';
 import './DashboardLayout.css';
 
 export default function DashboardLayout() {
@@ -17,7 +18,6 @@ export default function DashboardLayout() {
     return () => window.removeEventListener('resize', handler);
   }, []);
 
-  // Close on route change for mobile
   const handleMobileToggle = () => setMobileOpen(o => !o);
 
   return (
@@ -43,6 +43,9 @@ export default function DashboardLayout() {
           <Outlet />
         </main>
       </div>
+
+      {/* Mobile bottom nav */}
+      <BottomNav />
     </div>
   );
 }

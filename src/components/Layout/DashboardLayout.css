@@ -1,7 +1,9 @@
+/* ============================================================
+   DASHBOARD LAYOUT — MOBILE FIRST
+   ============================================================ */
 .dashboard-layout {
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 .dashboard-main {
@@ -9,31 +11,38 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 .dashboard-content {
   flex: 1;
+  padding: 16px;
+  padding-bottom: calc(var(--bottomnav-height) + 16px);
   overflow-y: auto;
-  padding: 24px;
-  background: var(--bg-primary);
 }
 
-.sidebar-overlay {
-  display: none;
-}
-
-@media (max-width: 768px) {
+@media (min-width: 769px) {
   .dashboard-content {
-    padding: 16px;
+    padding: 24px;
+    padding-bottom: 24px;
   }
+}
 
-  .sidebar-overlay {
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: hsla(224, 27%, 3%, 0.7);
-    backdrop-filter: blur(4px);
-    z-index: 99;
+@media (min-width: 1024px) {
+  .dashboard-content {
+    padding: 28px 32px;
   }
+}
+
+/* Mobile sidebar overlay */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;
+  animation: fadeIn 0.2s ease-out;
+}
+
+[data-theme="light"] .sidebar-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }
