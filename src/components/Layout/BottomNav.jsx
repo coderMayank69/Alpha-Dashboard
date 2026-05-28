@@ -21,9 +21,10 @@ export default function BottomNav() {
         const active = location.pathname.startsWith(to);
         return (
           <NavLink key={to} to={to} className={`bnav-item ${active ? 'active' : ''}`}>
-            <Icon size={20} strokeWidth={active ? 2.2 : 1.8} />
+            <span className="bnav-icon-wrap">
+              <Icon size={18} strokeWidth={active ? 2.3 : 1.8} />
+            </span>
             <span className="bnav-label">{label}</span>
-            {active && <span className="bnav-indicator" />}
           </NavLink>
         );
       })}

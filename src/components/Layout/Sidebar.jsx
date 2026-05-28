@@ -1,5 +1,8 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, BarChart3, Settings, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  LayoutDashboard, Package, BarChart3,
+  Settings, ChevronLeft, ChevronRight
+} from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import Logo from './Logo';
 import './Sidebar.css';
@@ -19,7 +22,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen }) {
     <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
       {/* Logo */}
       <div className="sidebar-logo">
-        <Logo size={30} />
+        <Logo size={28} />
         {!collapsed && <span className="logo-text">Alpha</span>}
       </div>
 
@@ -33,17 +36,27 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen }) {
               key={to}
               to={to}
               className={`nav-item ${active ? 'active' : ''}`}
-              data-tooltip={collapsed ? label : undefined}
+              title={collapsed ? label : undefined}
             >
-              <Icon size={18} strokeWidth={active ? 2.2 : 1.8} />
-              {!collapsed && <span>{label}</span>}
-              {active && !collapsed && <div className="nav-active-indicator" />}
+              {/* Active bar indicator */}
+              <span className="nav-active-bar" aria-hidden="true" />
+
+              {/* Icon */}
+              <span className="nav-icon">
+                <Icon size={17} strokeWidth={active ? 2.3 : 1.8} />
+              </span>
+
+              {/* Label (hidden when collapsed) */}
+              {!collapsed && <span className="nav-label">{label}</span>}
+
+              {/* Real tooltip span — won't overflow viewport */}
+              <span className="nav-tooltip" aria-hidden="true">{label}</span>
             </NavLink>
           );
         })}
       </nav>
 
-      {/* User Badge */}
+      {/* User footer */}
       <div className="sidebar-footer">
         <div className="sidebar-user">
           <div className={`user-avatar ${isAdmin ? 'admin' : ''}`}>
@@ -52,16 +65,20 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen }) {
           {!collapsed && (
             <div className="user-info">
               <span className="user-name">{user?.name}</span>
-              <span className={`badge badge-sm ${isAdmin ? 'badge-accent' : 'badge-muted'}`}>
+              <span className={`badge-sm ${isAdmin ? 'badge-accent' : 'badge-muted'}`}>
                 {isAdmin ? 'Admin' : 'User'}
               </span>
             </div>
           )}
         </div>
 
-        {/* Collapse Toggle */}
-        <button className="collapse-btn btn-icon" onClick={onToggle} aria-label="Toggle sidebar">
-          {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+        {/* Collapse toggle (desktop only) */}
+        <button
+          className="collapse-btn"
+          onClick={onToggle}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
         </button>
       </div>
     </aside>

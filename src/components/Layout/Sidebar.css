@@ -1,5 +1,5 @@
 /* ============================================================
-   SIDEBAR — DUAL THEME, MOBILE-FIRST
+   SIDEBAR — CLEAN, MINIMAL, DUAL THEME
    ============================================================ */
 .sidebar {
   width: var(--sidebar-width);
@@ -8,7 +8,7 @@
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  transition: width var(--transition-slow), background var(--transition);
+  transition: width var(--transition-slow);
   position: sticky;
   top: 0;
   flex-shrink: 0;
@@ -18,57 +18,71 @@
 
 [data-theme="light"] .sidebar {
   background: #ffffff;
-  box-shadow: 1px 0 0 var(--border);
 }
 
 .sidebar.collapsed {
   width: var(--sidebar-collapsed);
 }
 
-/* Logo */
+/* ── Logo ─────────────────────────────────────── */
 .sidebar-logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 18px 16px;
+  padding: 0 14px;
+  height: var(--topbar-height);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
 
 .logo-text {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
   background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
-/* Nav */
+/* ── Nav ─────────────────────────────────────── */
 .sidebar-nav {
   flex: 1;
-  padding: 12px 8px;
+  padding: 10px 8px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   overflow-y: auto;
+}
+
+.nav-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 10px 4px;
+  white-space: nowrap;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 10px;
+  padding: 8px 10px;
   border-radius: var(--radius-md);
   color: var(--text-secondary);
   font-size: 13.5px;
   font-weight: 500;
   transition: all var(--transition);
-  position: relative;
-  white-space: nowrap;
   text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  user-select: none;
 }
 
 .nav-item:hover {
@@ -79,25 +93,80 @@
 .nav-item.active {
   background: var(--accent-dim);
   color: var(--accent);
+  font-weight: 600;
 }
 
 [data-theme="light"] .nav-item.active {
   background: hsla(239, 84%, 67%, 0.08);
-  color: hsl(239, 84%, 55%);
+  color: hsl(239, 84%, 52%);
 }
 
-.nav-active-indicator {
+.nav-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-active-bar {
   position: absolute;
-  right: 8px;
-  width: 6px;
-  height: 6px;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
   background: var(--accent);
-  border-radius: 50%;
+  border-radius: 0 3px 3px 0;
+  opacity: 0;
+  transition: opacity var(--transition);
 }
 
-/* Footer */
+.nav-item.active .nav-active-bar {
+  opacity: 1;
+}
+
+/* ── Collapsed sidebar tooltip ────────────────── */
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Tooltip: render to the right, clamped inside viewport */
+.sidebar.collapsed .nav-item .nav-tooltip {
+  display: block;
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 5px 10px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  opacity: 0;
+  transition: opacity var(--transition), transform var(--transition);
+  transform: translateY(-50%) translateX(-4px);
+}
+
+.sidebar.collapsed .nav-item:hover .nav-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── Footer ─────────────────────────────────── */
 .sidebar-footer {
-  padding: 12px 8px;
+  padding: 8px;
   border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
@@ -108,25 +177,29 @@
 .sidebar-user {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex: 1;
   min-width: 0;
+  padding: 4px 4px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition);
+  overflow: hidden;
 }
 
 .user-avatar {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: var(--radius-md);
   background: var(--bg-tertiary);
   border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--text-secondary);
   flex-shrink: 0;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
 }
 
 .user-avatar.admin {
@@ -138,7 +211,7 @@
 .user-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   min-width: 0;
   overflow: hidden;
 }
@@ -153,84 +226,97 @@
 }
 
 .badge-sm {
-  padding: 1px 6px;
-  font-size: 9.5px;
+  padding: 1px 5px;
+  font-size: 9px;
+  font-weight: 700;
   border-radius: 20px;
   display: inline-block;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .collapse-btn {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-muted);
+  transition: all var(--transition);
 }
 
-/* Collapsed tooltip */
-.sidebar.collapsed .nav-item {
-  justify-content: center;
-}
-
-.sidebar.collapsed .nav-item::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  left: calc(100% + 12px);
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
+.collapse-btn:hover {
   color: var(--text-primary);
-  padding: 5px 10px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition);
-  z-index: 100;
-  box-shadow: var(--shadow-md);
+  background: var(--bg-tertiary);
 }
 
-.sidebar.collapsed .nav-item:hover::after {
-  opacity: 1;
-}
-
-/* ---- MOBILE: Hide sidebar, show only when toggled ---- */
+/* ── Mobile: slide in from left ─────────────── */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
     left: 0;
     top: 0;
+    height: 100dvh;
     z-index: 100;
     transform: translateX(-100%);
-    transition: transform var(--transition-slow), width var(--transition-slow);
-    width: var(--sidebar-width);
+    transition: transform var(--transition-slow);
+    width: var(--sidebar-width) !important;
+    box-shadow: var(--shadow-lg);
   }
 
   .sidebar.mobile-open {
     transform: translateX(0);
   }
 
-  .sidebar.collapsed {
-    width: var(--sidebar-width);
-  }
+  /* Don't show tooltips on mobile */
+  .nav-tooltip { display: none !important; }
 }
 
-/* ---- TABLET: auto-collapse ---- */
+/* ── Tablet: icon-only, no labels ───────────── */
 @media (min-width: 769px) and (max-width: 1024px) {
   .sidebar {
     width: var(--sidebar-collapsed);
   }
-  .sidebar .logo-text,
-  .sidebar .user-info,
-  .sidebar .nav-item span,
-  .sidebar .nav-active-indicator {
+
+  .logo-text,
+  .nav-label,
+  .nav-active-bar,
+  .nav-section-label,
+  .user-info {
     display: none;
   }
-  .sidebar .nav-item {
+
+  .nav-item {
     justify-content: center;
+    padding: 10px;
+  }
+
+  /* Show tooltip on tablet too */
+  .nav-item .nav-tooltip {
+    display: block;
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 5px 10px;
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: var(--shadow-md);
+    z-index: 200;
+    opacity: 0;
+    transition: opacity var(--transition), transform var(--transition);
+  }
+
+  .nav-item:hover .nav-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
   }
 }
